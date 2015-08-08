@@ -1,0 +1,124 @@
+﻿<Window
+    x:Class="Mntone.TwitterVideoUploader.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Mntone.TwitterVideoUploader.Views"
+    xmlns:c="clr-namespace:Mntone.TwitterVideoUploader.Views.Controls"
+    Title="Twitterに動画をうｐするマン"
+    MinHeight="150"
+    Height="180"
+    Width="500"
+    FontFamily="Segoe UI"
+    Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <BooleanToVisibilityConverter
+            x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid
+        Margin="7">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition
+                Height="7" />
+            <RowDefinition
+                Height="28" />
+            <RowDefinition
+                Height="7" />
+            <RowDefinition
+                Height="28" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition
+                Width="7" />
+            <ColumnDefinition
+                Width="75" />
+        </Grid.ColumnDefinitions>
+
+        <TextBox
+            x:Name="StatusTextBox"
+            Grid.ColumnSpan="3"
+            AcceptsReturn="True" />
+
+        <TextBox
+            x:Name="FilenameTextBox"
+            Grid.Row="2"
+            VerticalContentAlignment="Center"
+            TextChanged="FilenameTextBoxTextChanged" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="2"
+            Content="Open..."
+            Click="OpenClick" />
+
+        <Button
+            x:Name="UploadButton"
+            Grid.Row="4"
+            Grid.Column="2"
+            Content="Upload"
+            Click="UploadButtonClick"
+            IsEnabled="{Binding IsUploadEnabled}" />
+
+        <c:DropDownMenuButton
+            Grid.Row="4"
+            HorizontalAlignment="Left"
+            BorderBrush="Transparent"
+            Background="Transparent">
+            <c:DropDownMenuButton.DropDownMenu>
+                <c:DropDownMenu>
+                    <MenuItem
+                        Header="Authorize"
+                        Click="AuthorizeClick" />
+                </c:DropDownMenu>
+            </c:DropDownMenuButton.DropDownMenu>
+
+            <Grid>
+                <StackPanel
+                    Orientation="Horizontal"
+                    VerticalAlignment="Bottom"
+                    Visibility="{Binding IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid>
+                        <Ellipse
+                            Height="14"
+                            Width="14"
+                            Fill="#0AB242" />
+                        <TextBlock
+                            Margin="2"
+                            Foreground="White"
+                            FontSize="14"
+                            Text="✓" />
+                    </Grid>
+                    <TextBlock
+                        x:Name="ScreenNameTextBlock"
+                        Margin="3,2,0,0"
+                        Foreground="#0AB242"
+                        FontSize="14"
+                        Text="unknown" />
+                </StackPanel>
+                <StackPanel
+                    Orientation="Horizontal"
+                    VerticalAlignment="Bottom"
+                    Visibility="{Binding IsNotSignIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid>
+                        <Ellipse
+                            Height="14"
+                            Width="14"
+                            Fill="#C41A41" />
+                        <TextBlock
+                            Margin="2,0,2,2"
+                            Foreground="White"
+                            FontSize="14"
+                            Text="×" />
+                    </Grid>
+                    <TextBlock
+                        Margin="3,2,0,0"
+                        Foreground="#C41A41"
+                        FontSize="14"
+                        Text="(not authorized)" />
+                </StackPanel>
+            </Grid>
+        </c:DropDownMenuButton>
+    </Grid>
+</Window>

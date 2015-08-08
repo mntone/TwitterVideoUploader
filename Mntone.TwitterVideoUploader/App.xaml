@@ -1,0 +1,17 @@
+﻿<Application
+    x:Class="Mntone.TwitterVideoUploader.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Mntone.TwitterVideoUploader"
+    StartupUri="Views/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/TwitterVideoUploader;component/Themes/DropDownMenuButton.xaml" />
+                <ResourceDictionary
+                    Source="/TwitterVideoUploader;component/Themes/DropDownMenu.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
