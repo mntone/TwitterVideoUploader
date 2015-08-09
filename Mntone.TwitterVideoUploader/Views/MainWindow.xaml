@@ -1,15 +1,15 @@
-﻿<Window
+﻿<pm:PerMonitorDpiSupportWindow
     x:Class="Mntone.TwitterVideoUploader.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Mntone.TwitterVideoUploader.Views"
     xmlns:c="clr-namespace:Mntone.TwitterVideoUploader.Views.Controls"
+	xmlns:pm="clr-namespace:Mntone.Windows.PerMonitorDpiSupport;assembly=Mntone.Windows.PerMonitorDpiSupport"
     Title="Twitterに動画をうｐするマン"
     MinHeight="150"
     Height="180"
     Width="500"
     FontFamily="Segoe UI"
-    Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Window.Resources>
         <BooleanToVisibilityConverter
@@ -121,4 +121,4 @@
             </Grid>
         </c:DropDownMenuButton>
     </Grid>
-</Window>
+</pm:PerMonitorDpiSupportWindow>

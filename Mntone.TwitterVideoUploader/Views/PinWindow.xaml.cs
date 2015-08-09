@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
+using Mntone.Windows.PerMonitorDpiSupport;
 
 namespace Mntone.TwitterVideoUploader.Views
 {
-	public partial class PinWindow : Window
+	public partial class PinWindow : PerMonitorDpiSupportWindow
 	{
 		public AuthorizationSessionData SessionData { get; set; }
 

@@ -1,14 +1,14 @@
-﻿<Window
+﻿<pm:PerMonitorDpiSupportWindow
     x:Class="Mntone.TwitterVideoUploader.Views.PinWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Mntone.TwitterVideoUploader.Views"
+    xmlns:pm="clr-namespace:Mntone.Windows.PerMonitorDpiSupport;assembly=Mntone.Windows.PerMonitorDpiSupport"
     Title="PinWindow"
 	WindowStyle="ToolWindow"
     Height="80"
     Width="160"
-    ResizeMode="NoResize"
-    Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
+    ResizeMode="NoResize">
     <Grid
         Margin="5">
         <Grid.RowDefinitions>
@@ -25,4 +25,4 @@
             Grid.Row="2"
 			TextChanged="PincodeTextBoxTextChanged"/>
     </Grid>
-</Window>
+</pm:PerMonitorDpiSupportWindow>

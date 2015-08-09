@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Mntone.TwitterVideoUploader.Core;
+using Mntone.Windows.PerMonitorDpiSupport;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ using System.Windows.Controls;
 
 namespace Mntone.TwitterVideoUploader.Views
 {
-	public partial class MainWindow : Window, INotifyPropertyChanged
+	public partial class MainWindow : PerMonitorDpiSupportWindow, INotifyPropertyChanged
 	{
 		private static AppContext Ctx => ((App)App.Current).Context;
 
