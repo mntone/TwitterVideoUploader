@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using CoreTweet;
+using Microsoft.Win32;
 using Mntone.TwitterVideoUploader.Core;
 using Mntone.Windows.PerMonitorDpiSupport;
 using System;
@@ -109,6 +110,10 @@ namespace Mntone.TwitterVideoUploader.Views
 			{
 				var status = await Ctx.UploadAsync(this.StatusTextBox.Text, this.FilenameTextBox.Text);
 				this.StatusTextBox.Text = string.Empty;
+			}
+			catch (TwitterException ex)
+			{
+				MessageBox.Show(ex.Message, "Error");
 			}
 			catch (ArgumentException ex)
 			{
