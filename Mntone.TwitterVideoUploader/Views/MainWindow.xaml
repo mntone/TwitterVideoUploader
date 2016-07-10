@@ -40,12 +40,13 @@
         <TextBox
             x:Name="StatusTextBox"
             Grid.ColumnSpan="3"
-            AcceptsReturn="True" />
+			AcceptsReturn="True"
+			TextWrapping="Wrap" />
 
         <TextBox
             x:Name="FilenameTextBox"
             Grid.Row="2"
-            VerticalContentAlignment="Center"
+			VerticalContentAlignment="Center"
             TextChanged="FilenameTextBoxTextChanged" />
         <Button
             Grid.Row="2"
