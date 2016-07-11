@@ -11,7 +11,6 @@ namespace Mntone.TwitterVideoUploader.Core
 	{
 		private const string consumerKey = "3zepzfZr2jSSzT9bpZqX4cT9M";
 		private const string consumerSecret = "epLP6WxmuOo7DLeC21WjagDeBVn4TbKACb3lmuLPBTDKGMVojS";
-		private const int maximumFileSize = 15 * 1024 * 1024;
 
 		private const string settingsFileName = "./settings.json";
 
@@ -75,10 +74,6 @@ namespace Mntone.TwitterVideoUploader.Core
 			{
 				throw new InvalidOperationException("Not sign in!");
 			}
-			if (!IsValidPath(filename))
-			{
-				throw new ArgumentException("File doesn’t exist!");
-			}
 
 			using (var stream = new FileStream(filename, FileMode.Open))
 			{
@@ -87,7 +82,5 @@ namespace Mntone.TwitterVideoUploader.Core
 				return postResult;
 			}
 		}
-
-		public static bool IsValidPath(string filename) => File.Exists(filename) && (new FileInfo(filename)).Length <= maximumFileSize;
 	}
 }

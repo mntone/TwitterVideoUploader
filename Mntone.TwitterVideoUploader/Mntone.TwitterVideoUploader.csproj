@@ -43,6 +43,9 @@
       <HintPath>..\packages\CoreTweet.0.6.4.304\lib\net45\CoreTweet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MediaFoundation">
+      <HintPath>..\infrastructure\MediaFoundation.dll</HintPath>
+    </Reference>
     <Reference Include="Mntone.Windows.PerMonitorDpiSupport, Version=0.9.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mntone.Windows.PerMonitorDpiSupport.0.9.0.1\lib\net45\Mntone.Windows.PerMonitorDpiSupport.dll</HintPath>
       <Private>True</Private>
@@ -67,7 +70,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\FormatChecker\Extensions\SourceResolverExtensions.cs" />
+    <Compile Include="Core\FormatChecker\Extensions\StreamDescriptorExtensions.cs" />
+    <Compile Include="Core\FormatChecker\Extensions\PresentationDescriptorExtensions.cs" />
+    <Compile Include="Core\FormatChecker\Extensions\MediaTypeHandlerExtensions.cs" />
+    <Compile Include="Core\FormatChecker\Extensions\MediaTypeExtension.cs" />
+    <Compile Include="Core\FormatChecker\FormatChecker.cs" />
+    <Compile Include="Core\FormatChecker\FormatCheckElement.cs" />
+    <Compile Include="Core\FormatChecker\Units\Fraction.cs" />
+    <Compile Include="Core\FormatChecker\Units\Size.cs" />
+    <Compile Include="Core\FormatChecker\Extensions\VideoMediaTypeExtension.cs" />
     <Compile Include="Core\Settings.cs" />
+    <Compile Include="Core\FormatChecker\Extensions\AudioMediaTypeExtension.cs" />
+    <Compile Include="Defines\TwitterLimitation.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\AuthorizationSessionData.cs" />
     <Compile Include="Views\Controls\DropDownMenu.cs" />
     <Compile Include="Views\Controls\DropDownMenuButton.cs" />
@@ -110,6 +130,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
+      <LastGenOutput>Resources.ja-JP.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
