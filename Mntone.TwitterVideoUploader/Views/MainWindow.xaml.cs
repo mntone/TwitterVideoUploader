@@ -255,6 +255,7 @@ namespace Mntone.TwitterVideoUploader.Views
 			{
 				var status = await Ctx.UploadAsync(this.StatusTextBox.Text, this.FilenameTextBox.Text);
 				this.StatusTextBox.Text = string.Empty;
+				this.FilenameTextBox.Text = string.Empty;
 			}
 			catch (TwitterException ex)
 			{
