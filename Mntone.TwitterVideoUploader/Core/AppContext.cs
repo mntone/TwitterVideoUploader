@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using static CoreTweet.OAuth;
 
@@ -11,6 +12,7 @@ namespace Mntone.TwitterVideoUploader.Core
 	{
 		private const string consumerKey = "3zepzfZr2jSSzT9bpZqX4cT9M";
 		private const string consumerSecret = "epLP6WxmuOo7DLeC21WjagDeBVn4TbKACb3lmuLPBTDKGMVojS";
+		private const int maxPartSize = 5 * 1024 * 1024; // 5 MB
 
 		private const string settingsFileName = "./settings.json";
 
@@ -75,12 +77,32 @@ namespace Mntone.TwitterVideoUploader.Core
 				throw new InvalidOperationException("Not sign in!");
 			}
 
-			using (var stream = new FileStream(filename, FileMode.Open))
+			UploadInitCommandResult initResult;
+			using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
 			{
-				var mediaResult = await this.Tokens.Media.UploadChunkedAsync(stream, UploadMediaType.Video);
-				var postResult = await this.Tokens.Statuses.UpdateAsync(status, media_ids: new long[] { mediaResult.MediaId });
-				return postResult;
+				var length = (int)stream.Length;
+				initResult = await this.Tokens.Media.UploadInitCommandAsync(length, UploadMediaType.Video);
+
+				var parts = length / maxPartSize;
+				await Task.WhenAll(Enumerable.Range(0, parts).Select(async i =>
+				{
+					var chunkedData = new byte[maxPartSize];
+					await stream.ReadAsync(chunkedData, 0, maxPartSize);
+					await this.Tokens.Media.UploadAppendCommandAsync(initResult.MediaId, i, chunkedData);
+				}));
+
+				var lastPartSize = length % maxPartSize;
+				if (lastPartSize != 0)
+				{
+					var chunkedData = new byte[lastPartSize];
+					await stream.ReadAsync(chunkedData, 0, lastPartSize);
+					await this.Tokens.Media.UploadAppendCommandAsync(initResult.MediaId, parts, chunkedData);
+				}
 			}
+
+			var finalizeResult = await this.Tokens.Media.UploadFinalizeCommandAsync(initResult.MediaId);
+			var postResult = await this.Tokens.Statuses.UpdateAsync(status, media_ids: new long[] { initResult.MediaId });
+			return postResult;
 		}
 	}
 }
